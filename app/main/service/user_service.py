@@ -56,7 +56,6 @@ def save_changes(data, is_update=False):
         db.session.commit()
     except Exception as e:
         db.session.rollback()
-        import pdb; pdb.set_trace()
         raise Exception
     
 def delete_record(data):

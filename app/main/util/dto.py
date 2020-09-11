@@ -110,7 +110,6 @@ class StoreDto:
         'id': fields.Integer(required=False, description='role id'),
         'name': fields.String(description='store name'),
         'email': fields.String(required=True, description='store email'),
-        'dp': fields.String(required=False, description='store display image'),
         'roles': fields.List(fields.Nested(RoleDto.role))
     })
 
@@ -119,6 +118,6 @@ class UserDto:
     api = Namespace('user', description='user related operations')
     user = api.model('user', {
         'email': fields.String(required=True, description='email address'),
-        'roles': fields.List(fields.Integer(description="role identifier")),
+        'roles': fields.List(fields.Nested(RoleDto.role)),
         'password': fields.String(required=True, description='password'),
     })

@@ -86,8 +86,6 @@ class User(BaseModel):
                 as_json['roles'] = _roles 
             elif isinstance(value, (datetime, date)):
                 as_json[column] = value.isoformat()
-            elif column == "roles":
-                import pdb; pdb.set_trace()
             else:
                 as_json[column] = value
         return as_json

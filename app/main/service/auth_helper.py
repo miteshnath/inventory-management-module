@@ -13,7 +13,6 @@ class Auth:
             if user and user.check_password(data.get('password')):
                 auth_token = User.encode_auth_token(user.id)
                 if auth_token:
-                    import pdb; pdb.set_trace()
                     response_object = {
                         'status': 'success',
                         'message': 'Successfully logged in.',

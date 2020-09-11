@@ -3,12 +3,6 @@ from .. import db
 from .base import BaseModel
 
 
-store_brand_association = db.Table('store_brand_association',
-    db.Column('store_id', db.Integer, db.ForeignKey('stores.id')),
-    db.Column('brand_id', db.Integer, db.ForeignKey('brands.id'))
-)
-
-
 class Store(BaseModel):
     """
     Model for the stores table
@@ -20,7 +14,6 @@ class Store(BaseModel):
     email = db.Column(db.String(80), unique=True, nullable=False)
     inventory = db.relationship('Inventory', backref='stores', lazy=True)
     roles = db.relationship('Role', backref='stores', lazy=True)
-    brands = db.relationship("Brand", secondary=store_brand_association, back_populates="stores")
     
     def __repr__(self):
         return "<Store '{}'>".format(self.id)
