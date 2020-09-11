@@ -9,8 +9,8 @@ def save_new_user(data):
     user = User.query.filter_by(email=data['email']).first()
     if not user:
         new_user = User(
-            email=data['email'],
-            password=data['password']
+            email=data.get('email'),
+            password=data.get('password')
         )
         save_changes(new_user)
         return generate_token(new_user)
@@ -49,10 +49,15 @@ def generate_token(user):
 
 
 def save_changes(data, is_update=False):
-    if data is not None and not is_update:
-        db.session.add(data)    
+    try:
+        if data is not None and not is_update:
+            db.session.add(data)    
     
-    db.session.commit()
+        db.session.commit()
+    except Exception as e:
+        db.session.rollback()
+        import pdb; pdb.set_trace()
+        raise Exception
     
 def delete_record(data):
     try:

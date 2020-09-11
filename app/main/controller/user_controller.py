@@ -16,7 +16,11 @@ class UserList(Resource):
     @api.marshal_list_with(_user, envelope='data')
     def get(self):
         """List all registered users"""
-        return get_all_users()
+        users = get_all_users()
+        res = []
+        for user in users:
+            res.append(user._to_dict())
+        return res, 00
 
     @api.expect(_user, validate=True)
     @api.doc(params={'Authorization': {'in': 'header', 'description': 'An authorization token'}})

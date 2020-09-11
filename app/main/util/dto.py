@@ -119,5 +119,6 @@ class UserDto:
     api = Namespace('user', description='user related operations')
     user = api.model('user', {
         'email': fields.String(required=True, description='email address'),
-        'roles': fields.List(fields.Nested(RoleDto.role))
+        'roles': fields.List(fields.Integer(description="role identifier")),
+        'password': fields.String(required=True, description='password'),
     })

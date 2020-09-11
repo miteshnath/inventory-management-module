@@ -1,6 +1,6 @@
 from datetime import date, datetime
 from .. import db, flask_bcrypt
-import datetime
+
 from app.main.model.blacklist import BlacklistToken
 from ..config import key
 from .base import BaseModel
@@ -40,8 +40,8 @@ class User(BaseModel):
         """
         try:
             payload = {
-                'exp': datetime.datetime.utcnow() + datetime.timedelta(days=1, seconds=5),
-                'iat': datetime.datetime.utcnow(),
+                'exp': datetime.utcnow() + datetime.timedelta(days=1, seconds=5),
+                'iat': datetime.utcnow(),
                 'sub': user_id
             }
             return jwt.encode(
@@ -86,6 +86,8 @@ class User(BaseModel):
                 as_json['roles'] = _roles 
             elif isinstance(value, (datetime, date)):
                 as_json[column] = value.isoformat()
+            elif column == "roles":
+                import pdb; pdb.set_trace()
             else:
                 as_json[column] = value
         return as_json

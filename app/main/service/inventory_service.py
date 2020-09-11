@@ -49,7 +49,7 @@ def save_new_inventory(data):
         )
         for _id in data.get('products', []):
             new_invent.products.append(get_a_product(_id))
-        save_changes(update=True)
+        save_changes(new_invent)
         response_object = {
             'status': 'success',
             'message': 'Inventory successfully created'

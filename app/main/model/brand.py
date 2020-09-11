@@ -1,6 +1,7 @@
 from datetime import date, datetime
 from .. import db
 from .base import BaseModel
+from .store import store_brand_association
 
 
 class Brand(BaseModel):
@@ -12,8 +13,7 @@ class Brand(BaseModel):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=True)
     products = db.relationship('Product', backref='brands', lazy=True)
-    dp = db.Column(db.String(
-        120), default="https://ethos-photos.s3.ap-south-1.amazonaws.com/default_dp.png")
+    stores = db.relationship("Store", secondary=store_brand_association, back_populates="brands")
     
     def __repr__(self):
         return "<Brand '{}'>".format(self.id)

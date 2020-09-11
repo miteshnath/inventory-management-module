@@ -20,9 +20,7 @@ class Store(BaseModel):
     email = db.Column(db.String(80), unique=True, nullable=False)
     inventory = db.relationship('Inventory', backref='stores', lazy=True)
     roles = db.relationship('Role', backref='stores', lazy=True)
-    dp = db.Column(db.String(
-        120), default="https://ethos-photos.s3.ap-south-1.amazonaws.com/default_dp.png")
-    brands = db.relationship("Brand", secondary=store_brand_association)
+    brands = db.relationship("Brand", secondary=store_brand_association, back_populates="stores")
     
     def __repr__(self):
         return "<Store '{}'>".format(self.id)

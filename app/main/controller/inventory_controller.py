@@ -31,7 +31,6 @@ class InventoryList(Resource):
         return save_new_inventory(data=data)
     
 
-
 @api.route('/<id>')
 @api.doc(params={'Authorization': {'in': 'header', 'description': 'An authorization token'}})
 @api.param('id', 'Inventory identifier')
