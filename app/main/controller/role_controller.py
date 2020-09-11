@@ -36,6 +36,7 @@ class RoleList(Resource):
 @api.response(404, 'Role not found.')
 class Role(Resource):
     @api.doc('get a role')
+    @admin_token_required
     @api.marshal_with(role)
     def get(self, id):
         """get a brand given its identifier"""

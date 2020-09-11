@@ -20,11 +20,10 @@ class ItemList(Resource):
     def get(self):
         return get_all_items()
     
-       
+    @api.doc('create a new item')
+    @api.doc(params={'Authorization': {'in': 'header', 'description': 'An authorization token'}})       
     @api.expect(post_item, validate=True)
     @api.response(201, 'Item successfully created.')
-    @api.doc('create a new item')
-    @api.doc(params={'Authorization': {'in': 'header', 'description': 'An authorization token'}})
     @admin_token_required
     def post(self):
         """Creates a new Item """
@@ -39,6 +38,7 @@ class ItemList(Resource):
 @api.response(404, 'Item not found.')
 class Item(Resource):
     @api.doc('get an item')
+    @admin_token_required
     @api.marshal_with(item)
     def get(self, id):
         """get an item given its identifier"""

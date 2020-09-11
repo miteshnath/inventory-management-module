@@ -7,7 +7,7 @@ from ..service.user_service import save_new_user, get_all_users, get_a_user
 
 api = UserDto.api
 _user = UserDto.user
-
+_post_user = UserDto.post_user
 
 @api.route('/')
 class UserList(Resource):
@@ -22,7 +22,7 @@ class UserList(Resource):
             res.append(user._to_dict())
         return res, 00
 
-    @api.expect(_user, validate=True)
+    @api.expect(_post_user, validate=True)
     @api.doc(params={'Authorization': {'in': 'header', 'description': 'An authorization token'}})
     @api.response(201, 'User successfully created.')
     @api.doc('create a new user')

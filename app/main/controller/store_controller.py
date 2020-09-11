@@ -35,6 +35,7 @@ class StoreList(Resource):
 @api.response(404, 'Store not found.')
 class Store(Resource):
     @api.doc('get a store')
+    @admin_token_required
     @api.marshal_with(store)
     def get(self, id):
         """get a store given its identifier"""

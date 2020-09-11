@@ -39,6 +39,7 @@ class BrandList(Resource):
 @api.response(404, 'Brand not found.')
 class Brand(Resource):
     @api.doc('get a brand')
+    @admin_token_required
     @api.marshal_with(brand)
     def get(self, id):
         """get a brand given its identifier"""

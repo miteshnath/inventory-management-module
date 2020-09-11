@@ -38,6 +38,7 @@ class ProductList(Resource):
 @api.response(404, 'Product not found.')
 class Product(Resource):
     @api.doc('get a product')
+    @admin_token_required
     @api.marshal_with(product)
     def get(self, id):
         """get a product given its identifier"""

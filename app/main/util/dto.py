@@ -119,5 +119,9 @@ class UserDto:
     user = api.model('user', {
         'email': fields.String(required=True, description='email address'),
         'roles': fields.List(fields.Nested(RoleDto.role)),
+    })
+    post_user = api.model('user', {
+        'email': fields.String(required=True, description='email address'),
         'password': fields.String(required=True, description='password'),
+        'roles': fields.List(fields.Integer(description='associated roles')),
     })

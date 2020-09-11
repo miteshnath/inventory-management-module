@@ -37,6 +37,7 @@ class InventoryList(Resource):
 @api.response(404, 'Inventory not found.')
 class Inventory(Resource):
     @api.doc('get an inventory')
+    @admin_token_required
     @api.marshal_with(inventory)
     def get(self, id):
         """get an inventory given its identifier"""
