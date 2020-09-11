@@ -1,4 +1,4 @@
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
 from .. import db, flask_bcrypt
 
 from app.main.model.blacklist import BlacklistToken
@@ -40,7 +40,7 @@ class User(BaseModel):
         """
         try:
             payload = {
-                'exp': datetime.utcnow() + datetime.timedelta(days=1, seconds=5),
+                'exp': datetime.utcnow() + timedelta(days=1, seconds=5),
                 'iat': datetime.utcnow(),
                 'sub': user_id
             }
